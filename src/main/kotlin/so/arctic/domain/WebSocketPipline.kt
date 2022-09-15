@@ -19,6 +19,9 @@ class WebSocketPipeline {
                 connections.forEach {
                     it.session.send(textWithUsername)
                 }
+                if (receivedText.equals("bye", ignoreCase = true)) {
+                    close(CloseReason(CloseReason.Codes.NORMAL, "Client said BYE"))
+                }
             }
         } catch (e: Exception) {
             log.error(e.localizedMessage)
